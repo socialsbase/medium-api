@@ -17,3 +17,5 @@ Thumbs.db
 
 # Debug
 *.pdb
+
+.env
