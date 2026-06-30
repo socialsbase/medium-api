@@ -159,10 +159,11 @@ fn extract_article_id(url: &str) -> Option<String> {
     // The ID is typically the last part after the final dash
     // Medium IDs are usually 10-12 hex characters
     if let Some(last_dash) = slug.rfind('-') {
-        let potential_id = &slug[last_dash + 1..];
-        // Verify it looks like a Medium ID (hex characters)
-        if potential_id.len() >= 10 && potential_id.chars().all(|c| c.is_ascii_hexdigit()) {
-            return Some(potential_id.to_string());
+        if let Some(potential_id) = slug.get(last_dash + 1..) {
+            // Verify it looks like a Medium ID (hex characters)
+            if potential_id.len() >= 10 && potential_id.chars().all(|c| c.is_ascii_hexdigit()) {
+                return Some(potential_id.to_string());
+            }
         }
     }
 
