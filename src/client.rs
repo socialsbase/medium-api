@@ -39,6 +39,10 @@ impl Client {
         let mut headers = HeaderMap::new();
         headers.insert(USER_AGENT, HeaderValue::from_static("medium-api/0.1.0"));
 
+        #[allow(
+            clippy::expect_used,
+            reason = "a single static header never fails to build; only TLS backend init could fail here, which would also break any other reqwest usage in the process"
+        )]
         let http = reqwest::Client::builder()
             .default_headers(headers)
             .build()
